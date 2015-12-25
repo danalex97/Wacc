@@ -1,5 +1,6 @@
 package uk.ac.ic.ad5915.wacc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         initDesign();
         States.init();
 
-
+        startService(new Intent(this, MainService.class));
     }
 
     public void autoOnClick(View v) {
