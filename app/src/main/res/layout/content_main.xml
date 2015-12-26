@@ -144,7 +144,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="26dp"
                 android:max="10"
-                android:onClick="seekBarClick1"
                 />
 
             <TextView
@@ -167,8 +166,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="26dp"
-                android:max="10"
-                android:onClick="seekBarClick2"/>
+                android:max="10" />
 
             <TextView
                 android:text="Minimum volume"

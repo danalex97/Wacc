@@ -21,6 +21,14 @@ public class States {
         pedestrian = false;
     }
 
+    static public void setMaximum(int value) {
+        maximum = value;
+    }
+
+    static public void setMinimum(int value) {
+        minimum = value;
+    }
+
     static public float getMaximumPercent() {
         return (float)(maximum) / (float)(totalMaximum);
     }

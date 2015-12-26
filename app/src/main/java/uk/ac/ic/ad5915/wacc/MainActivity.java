@@ -9,12 +9,53 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int stateId1 = 1;
+    private static final int stateId2 = 2;
+
     void initDesign() {
         SeekBar seekBar1 = (SeekBar)findViewById(R.id.seekBar1);
         Design.changeSeekbar(seekBar1);
 
         SeekBar seekBar2 = (SeekBar)findViewById(R.id.seekBar2);
         Design.changeSeekbar(seekBar2);
+    }
+
+    void setListner(SeekBar seekBar, final int stateId) {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+
+            public void onStopTrackingTouch(SeekBar bar)
+            {
+            }
+
+            public void onStartTrackingTouch(SeekBar bar)
+            {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar bar, int paramInt, boolean paramBoolean)
+            {
+                Log.e("Seekbar change:", Integer.toString(paramInt) );
+                int percent = paramInt * 10;
+                switch ( stateId ) {
+                    case stateId1:
+                        States.setMaximum(percent);
+                        break;
+                    case stateId2:
+                        States.setMinimum(percent);
+                        break;
+                }
+            }
+        });
+    }
+
+    void setListners() {
+        SeekBar seekBar1 = (SeekBar)findViewById(R.id.seekBar1);
+        setListner(seekBar1, stateId1);
+
+
+        SeekBar seekBar2 = (SeekBar)findViewById(R.id.seekBar2);
+        setListner(seekBar2, stateId2);
     }
 
     @Override
@@ -24,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         initDesign();
         States.init();
+        setListners();
 
         startService(new Intent(this, MainService.class));
     }
@@ -38,15 +80,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void tubeOnClick(View v) {
         States.tubeOn();
-    }
-
-    public void seekBarClick1(View v) {
-        SeekBar seek = (SeekBar) findViewById(R.id.seekBar1);
-        int seekValue = seek.getProgress();
-        Log.e("Seeeeeeeeeeeek", Integer.toString(seekValue) );
-    }
-
-    public void seekBarClick2(View v) {
-
     }
 }
