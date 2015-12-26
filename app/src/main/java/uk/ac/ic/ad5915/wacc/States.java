@@ -14,16 +14,18 @@ public class States {
         minimum    = 0;
         vehicle    = false;
         pedestrian = false;
-
-
     }
 
-    public boolean isVehicle() {
+    static public boolean isVehicle() {
         return vehicle;
     }
 
-    public boolean isPedestrian() {
+    static public boolean isPedestrian() {
         return pedestrian;
+    }
+
+    static public boolean isAuto() {
+        return !isVehicle() && !isPedestrian();
     }
 
     static public void autoOn() {

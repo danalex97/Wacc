@@ -15,6 +15,9 @@ public class MainService extends Service implements SensorEventListener {
 
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
+    private PositionAnalyser analyser = new PositionAnalyser();
+    private MovementType movementType = MovementType.Stand;
+    private MovementType lastMovementType = MovementType.Stand;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -49,6 +52,52 @@ public class MainService extends Service implements SensorEventListener {
             Log.e("Printer x: ", Float.toString(x) );
             Log.e("Printer y: ", Float.toString(y) );
             Log.e("Printer z: ", Float.toString(z) );
+
+            if ( analyser.addData(x, y, z) == false ) {
+                MovementType movementTypeNow = analyser.getMovementType();
+                if ( movementType != movementTypeNow ) {
+                    lastMovementType = movementType;
+                }
+                movementType = movementTypeNow;
+
+                analyser.clearData();
+                analyser.addData(x, y, z);
+            }
+
+            if ( States.isAuto() ) {
+                switch (movementType) {
+                    case Stand:
+                        switch ( lastMovementType ) {
+                            case Ped:
+                                break;
+                            case Tube:
+                                break;
+                        }
+                        break;
+                    case Ped:
+                        break;
+                    case Tube:
+                        break;
+                }
+            } else if ( States.isVehicle() ) {
+                switch (movementType) {
+                    case Stand:
+                        Log.e("Movement type:", "Stand");
+                        break;
+                    default:
+                        Log.e("Movement type:", "Movement");
+                        break;
+                }
+            } else if ( States.isPedestrian() ) {
+                switch (movementType) {
+                    case Stand:
+                        Log.e("Movement type:", "Stand");
+                        break;
+                    default:
+                        Log.e("Movement type:", "Movement");
+                        break;
+                }
+            }
         }
     }
 }
