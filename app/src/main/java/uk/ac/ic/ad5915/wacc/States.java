@@ -4,16 +4,33 @@ package uk.ac.ic.ad5915.wacc;
  * Created by ad5915 on 25/12/15.
  */
 public class States {
+    private static int totalMaximum;
     private static int maximum;
     private static int minimum;
+
     private static boolean vehicle;
     private static boolean pedestrian;
 
     public static void init() {
-        maximum    = 100;
-        minimum    = 0;
+        maximum      = 100;
+        totalMaximum = 100;
+
+        minimum      = 0;
+
         vehicle    = false;
         pedestrian = false;
+    }
+
+    static public float getMaximumPercent() {
+        return (float)(maximum) / (float)(totalMaximum);
+    }
+
+    static public float getMinimumPercent() {
+        return (float)(minimum) / (float)(totalMaximum);
+    }
+
+    static public float getMiddlePercent() {
+        return (float)(minimum + maximum) / (float)(2 * totalMaximum);
     }
 
     static public boolean isVehicle() {
@@ -42,7 +59,5 @@ public class States {
         autoOn();
         vehicle = true;
     }
-
-
 
 }

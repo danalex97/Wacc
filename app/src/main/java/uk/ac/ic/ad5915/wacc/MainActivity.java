@@ -3,6 +3,7 @@ package uk.ac.ic.ad5915.wacc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 
@@ -37,5 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void tubeOnClick(View v) {
         States.tubeOn();
+    }
+
+    public void seekBarClick1(View v) {
+        SeekBar seek = (SeekBar) findViewById(R.id.seekBar1);
+        int seekValue = seek.getProgress();
+        Log.e("Seeeeeeeeeeeek", Integer.toString(seekValue) );
+    }
+
+    public void seekBarClick2(View v) {
+
     }
 }
